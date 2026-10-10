@@ -24,6 +24,7 @@ import pandas as pd
 import requests
 
 from build_medicare_partd_stimulant_2019_2024 import STIMULANT_RE, ingredient_family
+from util.env import STIMULANT_DATASET
 
 # Dataset UUIDs from https://data.cms.gov/data.json
 # ("Medicare Part D Prescribers - by Geography and Drug", one per data year).
@@ -110,11 +111,10 @@ def tidy(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def main():
-    here = Path(__file__).resolve().parent
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--start", type=int, default=min(DATASETS))
     ap.add_argument("--end", type=int, default=max(DATASETS))
-    ap.add_argument("--out", default=str(here / "data" / "medicare_partd_stimulant_prescribing_2013_2024.csv"))
+    ap.add_argument("--out", default=str(STIMULANT_DATASET))
     args = ap.parse_args()
 
     frames = []

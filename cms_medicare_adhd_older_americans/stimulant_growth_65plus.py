@@ -33,6 +33,8 @@ import argparse
 from pathlib import Path
 import pandas as pd
 
+from util.env import OUT_DIR, STIMULANT_DATASET
+
 # BLS CPI-U, U.S. city average, all items, annual average (series CUUR0000SA0).
 CPI_U = {
     2013: 232.957, 2014: 236.736, 2015: 237.017, 2016: 240.007,
@@ -101,10 +103,9 @@ def ingredient_table(nat: pd.DataFrame) -> pd.DataFrame:
 
 
 def main():
-    here = Path(__file__).resolve().parent
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--data", default=str(here / "data" / "medicare_partd_stimulant_prescribing_2013_2024.csv"))
-    ap.add_argument("--out", default=str(here / "stimulant_growth_65plus.xlsx"))
+    ap.add_argument("--data", default=str(STIMULANT_DATASET))
+    ap.add_argument("--out", default=str(OUT_DIR / "stimulant_growth_65plus.xlsx"))
     args = ap.parse_args()
 
     df = pd.read_csv(args.data, dtype={"Prscrbr_Geo_Cd": str, "GE65_Sprsn_Flag": str, "GE65_Bene_Sprsn_Flag": str})
