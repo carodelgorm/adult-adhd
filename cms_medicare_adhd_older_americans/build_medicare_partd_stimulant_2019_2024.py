@@ -11,7 +11,10 @@ Scope:
 Important limitations:
   1) CMS Medicare Part D Spending by Drug is NOT age-restricted. It includes
      Part D beneficiaries under 65 who qualify through disability/ESRD.
-     Do not describe these totals as "65+ spending."
+     Do not describe these totals as "65+ spending." For 65+ figures use
+     build_stimulant_prescribing_dataset.py, which draws on CMS Part D
+     Prescribers by Geography and Drug; that file reports claims, 30-day
+     fills, cost and beneficiaries for 65+ separately (GE65_* fields).
   2) CMS gross drug cost includes Medicare, plan, beneficiary, and other
      payments and does not subtract manufacturer rebates/price concessions.
   3) Tot_Benes is a unique beneficiary count within a drug/product row, but
@@ -287,9 +290,9 @@ def main():
         ],
         "Explanation": [
             "Schedule II stimulant ingredients commonly used for ADHD; non-stimulants such as atomoxetine, guanfacine, clonidine, and viloxazine are excluded.",
-            "The public CMS drug-spending file includes all Part D beneficiaries, including some under 65. These totals must not be labeled 65+ spending.",
+            "The public CMS drug-spending file includes all Part D beneficiaries, including some under 65. These totals must not be labeled 65+ spending. For 65+ figures, see build_stimulant_prescribing_dataset.py (CMS Part D Prescribers by Geography and Drug, GE65_* fields).",
             "Gross drug cost includes Medicare, plan, beneficiary and other payments and does not subtract manufacturer rebates/price concessions.",
-            "Beneficiary counts are unique within a product row. Summing them across stimulant products double-counts beneficiaries using multiple products, so the class-level field is labeled Beneficiary_Product_Counts.",
+            "Beneficiary counts are unique within a product row. Summing them across stimulant products double-counts beneficiaries using multiple products, so the class-level field is labeled Beneficiary_Product_Counts. No public CMS file gives a unique count of stimulant users across products, for any age group.",
             "This CMS file reports dosage units, not days supplied. A different Part D prescriber dataset is needed for days supplied.",
             "2019 comes from an archived historical CMS release because the current file is a rolling five-year release.",
             "The workbook includes a release-validation sheet comparing overlapping 2020-2022 totals across CMS release vintages."

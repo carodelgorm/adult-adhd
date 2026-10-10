@@ -10,8 +10,10 @@ Input:
 Limitations:
   1) Beneficiary counts are unique within a drug row. Summing across
      stimulant products double-counts people who used more than one product,
-     so the class total is labeled Bene_Product_Counts. Claims and 30-day
-     fills are additive and are the preferred volume measures.
+     so the class total is labeled Bene_Product_Counts. It is an upper
+     bound on the number of 65+ stimulant users, not a unique count; no
+     public CMS file provides one. Claims and 30-day fills are additive and
+     are the preferred volume measures.
   2) Raw counts, not rates: growth partly reflects growth in the number of
      Medicare Part D enrollees aged 65+.
   3) Drug cost is CMS gross drug cost (Medicare, plan, beneficiary and other
