@@ -3,7 +3,7 @@
 Trends in Medicare Part D stimulant prescribing and cost for beneficiaries 65+.
 
 Input:
-  data/medicare_partd_stimulant_prescribing_2013_2024.csv, built by
+  clean/medicare_partd_stimulant_prescribing_2013_2024.csv, built by
   build_stimulant_prescribing_dataset.py from CMS "Medicare Part D
   Prescribers - by Geography and Drug". National rows only.
 
@@ -24,7 +24,7 @@ Limitations:
      undercount; the script reports how many rows were suppressed.
 
 Usage:
-  python stimulant_growth_65plus.py
+  python stimulant_growth_65plus.py            # writes out/stimulant_growth_65plus.xlsx
   python stimulant_growth_65plus.py --data my.csv --out growth.xlsx
 """
 
@@ -116,6 +116,7 @@ def main():
     growth = growth_table(annual)
     ingredient = ingredient_table(nat)
 
+    Path(args.out).parent.mkdir(parents=True, exist_ok=True)
     with pd.ExcelWriter(Path(args.out), engine="xlsxwriter") as writer:
         growth.to_excel(writer, sheet_name="Growth", index=False)
         annual.to_excel(writer, sheet_name="Annual_65plus", index=False)

@@ -42,6 +42,8 @@ import requests
 import pandas as pd
 import numpy as np
 
+from util.env import OUT_DIR
+
 CURRENT_CSV = (
     "https://data.cms.gov/sites/default/files/2026-06/"
     "98218f98-166c-4723-8438-c344a4ef96a6/"
@@ -221,7 +223,7 @@ def release_validation(hist_long: pd.DataFrame, current_long: pd.DataFrame):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--out", default="medicare_partd_stimulant_2019_2024.xlsx")
+    ap.add_argument("--out", default=str(OUT_DIR / "medicare_partd_stimulant_2019_2024.xlsx"))
     ap.add_argument(
         "--historical-csv",
         default=None,
@@ -300,6 +302,7 @@ def main():
     })
 
     out = Path(args.out)
+    out.parent.mkdir(parents=True, exist_ok=True)
     with pd.ExcelWriter(out, engine="xlsxwriter") as writer:
         annual.to_excel(writer, sheet_name="Annual_Summary", index=False)
         ingredient.to_excel(writer, sheet_name="Ingredient_Year", index=False)

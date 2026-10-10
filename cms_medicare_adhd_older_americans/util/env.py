@@ -3,9 +3,8 @@ Project paths, resolved relative to this package so the code runs from any
 checkout location. Each can be overridden with an environment variable,
 e.g. to keep large downloads outside the repo:
 
-  ADHD_DATA_DIR   analysis-ready datasets       (default: <package>/data)
-  ADHD_OUT_DIR    generated workbooks/figures   (default: <package>)
-  ADHD_CLEAN_DIR  intermediate cleaned files    (default: <package>/clean)
+  ADHD_CLEAN_DIR  analysis-ready datasets       (default: <package>/clean)
+  ADHD_OUT_DIR    generated workbooks/figures   (default: <package>/out)
 """
 
 from __future__ import annotations
@@ -20,11 +19,10 @@ def _dir(var: str, default: Path) -> Path:
     return Path(value).expanduser().resolve() if value else default
 
 
-DATA_DIR = _dir("ADHD_DATA_DIR", PACKAGE_DIR / "data")
-OUT_DIR = _dir("ADHD_OUT_DIR", PACKAGE_DIR)
 CLEAN_DIR = _dir("ADHD_CLEAN_DIR", PACKAGE_DIR / "clean")
+OUT_DIR = _dir("ADHD_OUT_DIR", PACKAGE_DIR / "out")
 
-STIMULANT_DATASET = DATA_DIR / "medicare_partd_stimulant_prescribing_2013_2024.csv"
+STIMULANT_DATASET = CLEAN_DIR / "medicare_partd_stimulant_prescribing_2013_2024.csv"
 
 # Original helper API: DATA_PATH is the repository root, PJCT_PATH the package.
 DATA_PATH = str(PACKAGE_DIR.parent)
@@ -36,4 +34,4 @@ def data_path(*args):
 
 
 def out_path(*args):
-    return os.path.join(PJCT_PATH, "out", *args)
+    return os.path.join(str(OUT_DIR), *args)

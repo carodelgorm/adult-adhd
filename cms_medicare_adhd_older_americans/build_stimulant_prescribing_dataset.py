@@ -9,8 +9,8 @@ Source:
   fields CMS publishes, plus derived under-65 fields and an ingredient family.
 
 Output (one row per Year x geography x brand/generic product):
-  data/medicare_partd_stimulant_prescribing_2013_2024.csv
-  See data/README.md for the data dictionary and caveats.
+  clean/medicare_partd_stimulant_prescribing_2013_2024.csv
+  See clean/README.md for the data dictionary and caveats.
 
 Usage:
   python build_stimulant_prescribing_dataset.py
