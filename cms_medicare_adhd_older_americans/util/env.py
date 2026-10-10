@@ -25,3 +25,15 @@ OUT_DIR = _dir("ADHD_OUT_DIR", PACKAGE_DIR)
 CLEAN_DIR = _dir("ADHD_CLEAN_DIR", PACKAGE_DIR / "clean")
 
 STIMULANT_DATASET = DATA_DIR / "medicare_partd_stimulant_prescribing_2013_2024.csv"
+
+# Original helper API: DATA_PATH is the repository root, PJCT_PATH the package.
+DATA_PATH = str(PACKAGE_DIR.parent)
+PJCT_PATH = str(PACKAGE_DIR)
+
+
+def data_path(*args):
+    return os.path.join(DATA_PATH, *args)
+
+
+def out_path(*args):
+    return os.path.join(PJCT_PATH, "out", *args)
